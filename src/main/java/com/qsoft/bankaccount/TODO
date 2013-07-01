@@ -1,0 +1,9 @@
+/*
+ * TODO LIST
+ */
+
+test open new account with zero balance
+test get an account from db
+test deposit amount money to account, save log do db
+test withdraw amount money from account, save log to db
+test get all transaction list
