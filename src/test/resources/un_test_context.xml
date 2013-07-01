@@ -3,7 +3,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
-    <context:annotation-config />
+    <context:annotation-config/>
     <context:component-scan base-package="com.qsoft.bankaccount.persistence.dao"/>
 
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -19,13 +19,13 @@
         <property name="driverClassName" value="${database.driver}"/>
         <!--using postgres driver-->
         <property name="url" value="${database.url}"/>
-        <property name="username" value="${database.username}" />
-        <property name="password" value="${database.password}" />
+        <property name="username" value="${database.username}"/>
+        <property name="password" value="${database.password}"/>
     </bean>
 
     <bean id="entityManagerFactory"
           class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-        <property name="packagesToScan" value="com.qsoft.bankaccount.persistence.model" />
+        <property name="packagesToScan" value="com.qsoft.bankaccount.persistence.model"/>
         <property name="dataSource" ref="dataSource"/>
         <property name="persistenceUnitName" value="testPersistenceUnit"/>
         <property name="persistenceXmlLocation" value="META-INF/persistence.xml"/>
@@ -38,6 +38,6 @@
     <tx:annotation-driven transaction-manager="transactionManager"/>
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"/>
 
-    <bean id="bankAccountDao" class="com.qsoft.bankaccount.test.BankAccountDAODummy" />
-    <bean id="bankAccountService" class="com.qsoft.bankaccount.bussiness.impl.BankAccountServiceImpl" />
+    <bean id="bankAccountDao" class="com.qsoft.bankaccount.test.BankAccountDAODummy"/>
+    <bean id="bankAccountService" class="com.qsoft.bankaccount.bussiness.impl.BankAccountServiceImpl"/>
 </beans>
