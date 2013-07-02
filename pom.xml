@@ -122,6 +122,14 @@
             <version>1.6.12</version>
         </dependency>
 
+
+        <!--db unit-->
+        <dependency>
+            <groupId>org.dbunit</groupId>
+            <artifactId>dbunit</artifactId>
+            <version>2.4.9</version>
+        </dependency>
+
     </dependencies>
 
 

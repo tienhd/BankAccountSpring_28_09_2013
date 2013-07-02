@@ -11,6 +11,6 @@ public interface BankAccountDAO
 {
     public BankAccountEntity findBankAccount(String accountNumber);
     public BankAccountEntity createBankAccount(String accountNumber);
-    public void updateBankAccount(String accountNumber);
+    public void saveBankAccount(String accountNumber, double balance, String log);
     public void deleteBankAccount(String accountNumber);
 }

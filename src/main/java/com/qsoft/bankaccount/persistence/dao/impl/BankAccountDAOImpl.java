@@ -38,9 +38,13 @@ public class BankAccountDAOImpl implements BankAccountDAO
     }
 
     @Override
-    public void updateBankAccount(String accountNumber)
+    public void saveBankAccount(String accountNumber, double balance, String log)
     {
-        //To change body of implemented methods use File | Settings | File Templates.
+        BankAccountEntity bankAccountEntity = findBankAccount(accountNumber);
+        bankAccountEntity.setBalance(balance);
+        bankAccountEntity.setLog(log);
+        entityManager.persist(bankAccountEntity);
+        entityManager.flush();
     }
 
     @Override
