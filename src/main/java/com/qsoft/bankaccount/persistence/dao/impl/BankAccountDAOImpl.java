@@ -29,11 +29,12 @@ public class BankAccountDAOImpl implements BankAccountDAO
     }
 
     @Override
-    public void createBankAccount(String accountNumber)
+    public BankAccountEntity createBankAccount(String accountNumber)
     {
         BankAccountEntity bankAccountEntity = new BankAccountEntity(accountNumber);
         entityManager.persist(bankAccountEntity);
         entityManager.flush();
+        return bankAccountEntity;
     }
 
     @Override

@@ -36,6 +36,18 @@ public class BankAccountDAOUnTest
         BankAccountEntity bankAccountEntity = new BankAccountEntity(accountNumber,0,10000);
         BankAccountEntity getBankAccount = bankAccountDAO.findBankAccount(accountNumber);
         assertEquals(bankAccountEntity,getBankAccount);
+    }
 
+
+    @Test
+    public void openNewAccountThenPersistentToDB()
+    {
+        String accountNumber = "0123456789";
+        BankAccountEntity createBankAccount = bankAccountDAO.createBankAccount(accountNumber);
+
+        //get account back from db
+
+        BankAccountEntity getBankAccount = bankAccountDAO.findBankAccount(accountNumber);
+        assertEquals(getBankAccount,createBankAccount);
     }
 }
