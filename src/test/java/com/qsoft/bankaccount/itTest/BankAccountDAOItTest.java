@@ -23,6 +23,6 @@ public class BankAccountDAOItTest
     @Test
     public void TestPersistToDB() {
         String accountNumber = "123456789";
-        bankAccountDAO.createBankAccount(accountNumber);
+        bankAccountDAO.create(accountNumber);
     }
 }

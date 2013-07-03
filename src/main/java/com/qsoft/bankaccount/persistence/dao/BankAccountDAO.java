@@ -9,8 +9,8 @@ import com.qsoft.bankaccount.persistence.model.BankAccountEntity;
  */
 public interface BankAccountDAO
 {
-    public BankAccountEntity findBankAccount(String accountNumber);
-    public BankAccountEntity createBankAccount(String accountNumber);
-    public void saveBankAccount(String accountNumber, double balance, String log);
-    public void deleteBankAccount(String accountNumber);
+    public BankAccountEntity findByAccountNumber(String accountNumber);
+    public BankAccountEntity create (String accountNumber);
+    public void update (String accountNumber, double balance, String log);
+    public void deleteByAccountNumber(String accountNumber);
 }

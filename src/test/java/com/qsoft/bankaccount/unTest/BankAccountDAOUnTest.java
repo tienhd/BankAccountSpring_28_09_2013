@@ -76,7 +76,7 @@ public class BankAccountDAOUnTest
     public void testFindAccountByAccountNumber()
     {
         BankAccountEntity bankAccountEntity = new BankAccountEntity(accountNumber,100,10000);
-        BankAccountEntity getBankAccount = bankAccountDAO.findBankAccount(accountNumber);
+        BankAccountEntity getBankAccount = bankAccountDAO.findByAccountNumber(accountNumber);
         assertEquals(bankAccountEntity,getBankAccount);
     }
 
@@ -84,24 +84,30 @@ public class BankAccountDAOUnTest
     public void openNewAccountThenPersistentToDB()
     {
         String accountNumber = "0123456789";
-        BankAccountEntity createBankAccount = bankAccountDAO.createBankAccount(accountNumber);
+        BankAccountEntity createBankAccount = bankAccountDAO.create(accountNumber);
 
         //get account back from db then check equals
-        BankAccountEntity getBankAccount = bankAccountDAO.findBankAccount(accountNumber);
+        BankAccountEntity getBankAccount = bankAccountDAO.findByAccountNumber(accountNumber);
         assertEquals(getBankAccount,createBankAccount);
     }
 
     @Test
     public void testSaveMethodPersistentToDB()
     {
-        BankAccountEntity getBankAccount = bankAccountDAO.findBankAccount(accountNumber);
+        BankAccountEntity getBankAccount = bankAccountDAO.findByAccountNumber(accountNumber);
 
         double newBalance = 50 + getBankAccount.getBalance(); //150
-        bankAccountDAO.saveBankAccount(accountNumber,newBalance,"Deposited 50");
+        bankAccountDAO.update(accountNumber, newBalance, "Deposited 50");
 
-        BankAccountEntity savedBankAccount = bankAccountDAO.findBankAccount(accountNumber);
+        BankAccountEntity savedBankAccount = bankAccountDAO.findByAccountNumber(accountNumber);
         assertEquals(savedBankAccount.getAccountNumber(),accountNumber);
         assertEquals(savedBankAccount.getBalance(),newBalance,0.001);
+    }
+
+    @Test
+    public void testDepositMethodSaveLogToDB()
+    {
+
     }
 
 }

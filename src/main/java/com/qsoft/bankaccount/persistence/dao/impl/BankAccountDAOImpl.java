@@ -21,7 +21,7 @@ public class BankAccountDAOImpl implements BankAccountDAO
     private EntityManager entityManager;
 
     @Override
-    public BankAccountEntity findBankAccount(String accountNumber)
+    public BankAccountEntity findByAccountNumber(String accountNumber)
     {
         Query query = entityManager.createQuery("select o from BankAccountEntity o where o.accountNumber = :qAccountNumber");
         query.setParameter("qAccountNumber",accountNumber);
@@ -29,7 +29,7 @@ public class BankAccountDAOImpl implements BankAccountDAO
     }
 
     @Override
-    public BankAccountEntity createBankAccount(String accountNumber)
+    public BankAccountEntity create(String accountNumber)
     {
         BankAccountEntity bankAccountEntity = new BankAccountEntity(accountNumber);
         entityManager.persist(bankAccountEntity);
@@ -38,9 +38,9 @@ public class BankAccountDAOImpl implements BankAccountDAO
     }
 
     @Override
-    public void saveBankAccount(String accountNumber, double balance, String log)
+    public void update(String accountNumber, double balance, String log)
     {
-        BankAccountEntity bankAccountEntity = findBankAccount(accountNumber);
+        BankAccountEntity bankAccountEntity = findByAccountNumber(accountNumber);
         bankAccountEntity.setBalance(balance);
         bankAccountEntity.setLog(log);
         entityManager.persist(bankAccountEntity);
@@ -48,7 +48,7 @@ public class BankAccountDAOImpl implements BankAccountDAO
     }
 
     @Override
-    public void deleteBankAccount(String accountNumber)
+    public void deleteByAccountNumber(String accountNumber)
     {
         //To change body of implemented methods use File | Settings | File Templates.
     }
