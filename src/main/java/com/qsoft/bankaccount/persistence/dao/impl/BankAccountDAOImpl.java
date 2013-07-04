@@ -24,7 +24,7 @@ public class BankAccountDAOImpl implements BankAccountDAO
     public BankAccountEntity findByAccountNumber(String accountNumber)
     {
         Query query = entityManager.createQuery("select o from BankAccountEntity o where o.accountNumber = :qAccountNumber");
-        query.setParameter("qAccountNumber",accountNumber);
+        query.setParameter("qAccountNumber", accountNumber);
         return (BankAccountEntity) query.getResultList().get(0);
     }
 

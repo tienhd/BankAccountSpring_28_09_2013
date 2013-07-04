@@ -79,7 +79,7 @@ public class TransactionDAOUnTest
     @Test
     public void testFindAllTransactionByAccountNumber()
     {
-        List<TransactionEntity> resultTransactionEntityList = transactionDAO.findAllByAccountNumber(accountNumber);
+        List<TransactionEntity> resultTransactionEntityList = transactionDAO.findByAccountNumber(accountNumber);
         List<TransactionEntity> transactionEntityList = new ArrayList<TransactionEntity>();
 
         TransactionEntity transactionEntity1 = new TransactionEntity(accountNumber,20f,"Deposited to Account",12000);

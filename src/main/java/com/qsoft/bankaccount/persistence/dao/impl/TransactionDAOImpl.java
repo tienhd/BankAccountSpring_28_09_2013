@@ -19,10 +19,10 @@ public class TransactionDAOImpl implements TransactionDAO
     private EntityManager entityManager;
 
     @Override
-    public List<TransactionEntity> findAllByAccountNumber(String accountNumber)
+    public List<TransactionEntity> findByAccountNumber(String accountNumber)
     {
         Query query = entityManager.createQuery("select o from TransactionEntity o where o.accountNumber = :qAccountNumber");
-        query.setParameter("qAccountNumber",accountNumber);
+        query.setParameter("qAccountNumber", accountNumber);
         return query.getResultList();
     }
 

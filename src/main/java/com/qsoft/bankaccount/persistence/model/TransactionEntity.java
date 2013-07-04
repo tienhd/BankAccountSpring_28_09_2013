@@ -41,6 +41,7 @@ public class TransactionEntity
         this.log = log;
         this.timeStamp = timeStamp;
     }
+
     public String getAccountNumber()
     {
         return accountNumber;
