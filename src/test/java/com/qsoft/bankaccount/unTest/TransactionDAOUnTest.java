@@ -1,7 +1,7 @@
 package com.qsoft.bankaccount.unTest;
 
-import com.qsoft.bankaccount.persistence.dao.BankAccountDAO;
-import com.qsoft.bankaccount.persistence.model.BankAccountEntity;
+import com.qsoft.bankaccount.persistence.dao.TransactionDAO;
+import com.qsoft.bankaccount.persistence.model.TransactionEntity;
 import org.dbunit.IDatabaseTester;
 import org.dbunit.JdbcDatabaseTester;
 import org.dbunit.dataset.IDataSet;
@@ -19,24 +19,27 @@ import javax.sql.DataSource;
 import java.io.File;
 import java.io.FileInputStream;
 import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
+
 
 import static org.junit.Assert.assertEquals;
 
 /**
  * User: tienhd
- * Date: 7/1/13
- * Time: 1:28 AM
+ * Date: 7/4/13
+ * Time: 1:35 PM
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"classpath:/it_test_context.xml"})
-public class BankAccountDAOUnTest
+public class TransactionDAOUnTest
 {
     @Autowired
-    private BankAccountDAO bankAccountDAO;
+    private TransactionDAO transactionDAO;
     private Connection dbConnection;
 
     public static final String accountNumber = "1234567890";
-    private static final String resourcePath = new File ("").getAbsolutePath() + "/src/test/resources";
+    private static final String resourcePath = new File("").getAbsolutePath() + "/src/test/resources";
 
     public static final String JDBC_DRIVER = org.postgresql.Driver.class.getName();
     public static final String JDBC_URL = "jdbc:postgresql://localhost:5432/bank_account";
@@ -58,7 +61,7 @@ public class BankAccountDAOUnTest
     }
 
     public IDataSet importData() throws Exception {
-        String dataFile = resourcePath + "/data.xml";
+        String dataFile = resourcePath + "/data2.xml";
         System.out.println(dataFile);
         return new FlatXmlDataSetBuilder().build(new FileInputStream(dataFile));
     }
@@ -72,36 +75,23 @@ public class BankAccountDAOUnTest
         return dataSource;
     }
 
-    @Test
-    public void testFindAccountByAccountNumber()
-    {
-        BankAccountEntity bankAccountEntity = new BankAccountEntity(accountNumber,100,10000);
-        BankAccountEntity getBankAccount = bankAccountDAO.findByAccountNumber(accountNumber);
-        assertEquals(bankAccountEntity,getBankAccount);
-    }
 
     @Test
-    public void openNewAccountThenPersistentToDB()
+    public void testFindAllTransactionByAccountNumber()
     {
-        String accountNumber = "0123456789";
-        BankAccountEntity createBankAccount = bankAccountDAO.create(accountNumber);
+        List<TransactionEntity> resultTransactionEntityList = transactionDAO.findAllByAccountNumber(accountNumber);
+        List<TransactionEntity> transactionEntityList = new ArrayList<TransactionEntity>();
 
-        //get account back from db then check equals
-        BankAccountEntity getBankAccount = bankAccountDAO.findByAccountNumber(accountNumber);
-        assertEquals(getBankAccount,createBankAccount);
+        TransactionEntity transactionEntity1 = new TransactionEntity(accountNumber,20f,"Deposited to Account",12000);
+        TransactionEntity transactionEntity2 = new TransactionEntity(accountNumber,-10f,"Withdraw from Account",15000);
+        transactionEntityList.add(transactionEntity1);
+        transactionEntityList.add(transactionEntity2);
+        int i =0;
+        for (TransactionEntity ti : resultTransactionEntityList )
+        {
+            assertEquals(ti,transactionEntityList.get(i));
+            i++;
+        }
+
     }
-
-    @Test
-    public void testSaveMethodPersistentToDB()
-    {
-        BankAccountEntity getBankAccount = bankAccountDAO.findByAccountNumber(accountNumber);
-
-        double newBalance = 50 + getBankAccount.getBalance(); //150
-        bankAccountDAO.update(accountNumber, newBalance, "Deposited 50");
-
-        BankAccountEntity savedBankAccount = bankAccountDAO.findByAccountNumber(accountNumber);
-        assertEquals(savedBankAccount.getAccountNumber(),accountNumber);
-        assertEquals(savedBankAccount.getBalance(),newBalance,0.001);
-    }
-
 }

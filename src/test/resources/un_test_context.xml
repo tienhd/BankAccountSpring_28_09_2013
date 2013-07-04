@@ -38,6 +38,6 @@
     <tx:annotation-driven transaction-manager="transactionManager"/>
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"/>
 
-    <bean id="bankAccountDao" class="com.qsoft.bankaccount.test.BankAccountDAODummy"/>
+    <!--<bean id="bankAccountDao" class="com.qsoft.bankaccount.test.BankAccountDAODummy"/>-->
     <bean id="bankAccountService" class="com.qsoft.bankaccount.bussiness.impl.BankAccountServiceImpl"/>
 </beans>

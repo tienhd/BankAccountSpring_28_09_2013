@@ -9,10 +9,10 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "bank_account")
-@SequenceGenerator(name ="account_id",sequenceName = "account_id",allocationSize = 1)
+@SequenceGenerator(name = "account_id", sequenceName = "account_id", allocationSize = 1)
 public class BankAccountEntity
 {
-    @GeneratedValue (strategy=GenerationType.SEQUENCE ,generator = "account_id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "account_id")
     @Id
     @Column(name = "id")
     private long id;
@@ -33,6 +33,7 @@ public class BankAccountEntity
     {
 
     }
+
     public BankAccountEntity(String accountNumber)
     {
         this.accountNumber = accountNumber;
@@ -40,6 +41,7 @@ public class BankAccountEntity
         this.log = "";
         this.timeStamp = System.currentTimeMillis();
     }
+
     public BankAccountEntity(String accountNumber, double balance, long timeStamp)
     {
         this.accountNumber = accountNumber;
@@ -66,6 +68,11 @@ public class BankAccountEntity
     public long getTimeStamp()
     {
         return timeStamp;
+    }
+
+    public long getId()
+    {
+        return id;
     }
 
     public void setAccountNumber(String accountNumber)
