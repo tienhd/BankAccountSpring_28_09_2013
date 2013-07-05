@@ -9,7 +9,7 @@ import java.util.List;
  * Date: 7/1/13
  * Time: 12:05 AM
  */
-public interface TransactionDAO
+public interface TransactionDAO extends GenericDAO
 {
     public List<TransactionEntity> findByAccountNumber(String accountNumber);
 

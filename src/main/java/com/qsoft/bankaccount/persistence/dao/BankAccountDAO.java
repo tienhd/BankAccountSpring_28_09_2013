@@ -7,7 +7,7 @@ import com.qsoft.bankaccount.persistence.model.BankAccountEntity;
  * Date: 7/1/13
  * Time: 12:01 AM
  */
-public interface BankAccountDAO
+public interface BankAccountDAO extends GenericDAO
 {
     public BankAccountEntity findByAccountNumber(String accountNumber);
 

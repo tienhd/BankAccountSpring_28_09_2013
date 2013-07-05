@@ -5,7 +5,6 @@ import com.qsoft.bankaccount.persistence.model.BankAccountEntity;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 /**
@@ -15,17 +14,24 @@ import javax.persistence.Query;
  */
 
 @Transactional
-public class BankAccountDAOImpl implements BankAccountDAO
+public class BankAccountDAOImpl extends GenericDAOImpl implements BankAccountDAO
 {
-    @PersistenceContext
-    private EntityManager entityManager;
+//    @PersistenceContext
+//    EntityManager entityManager;
 
     @Override
     public BankAccountEntity findByAccountNumber(String accountNumber)
     {
         Query query = entityManager.createQuery("select o from BankAccountEntity o where o.accountNumber = :qAccountNumber");
         query.setParameter("qAccountNumber", accountNumber);
-        return (BankAccountEntity) query.getResultList().get(0);
+        if (query.getResultList().size() > 0)
+        {
+            return (BankAccountEntity) query.getResultList().get(0);
+        }
+        else
+        {
+            return null;
+        }
     }
 
     @Override
@@ -33,7 +39,6 @@ public class BankAccountDAOImpl implements BankAccountDAO
     {
         BankAccountEntity bankAccountEntity = new BankAccountEntity(accountNumber);
         entityManager.persist(bankAccountEntity);
-        entityManager.flush();
         return bankAccountEntity;
     }
 
@@ -44,7 +49,6 @@ public class BankAccountDAOImpl implements BankAccountDAO
         bankAccountEntity.setBalance(balance);
         bankAccountEntity.setLog(log);
         entityManager.persist(bankAccountEntity);
-        entityManager.flush();
     }
 
     @Override

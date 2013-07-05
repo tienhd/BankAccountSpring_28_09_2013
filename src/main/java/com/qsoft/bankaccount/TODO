@@ -7,3 +7,9 @@
 test deposit amount money to account, save log do db
 test withdraw amount money from account, save log to db
 test get all transaction list
+
+
+//Commented by Le
+
+create generic abstract DAO
+

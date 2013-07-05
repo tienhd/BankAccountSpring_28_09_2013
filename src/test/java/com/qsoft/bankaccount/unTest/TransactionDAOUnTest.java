@@ -14,6 +14,7 @@ import org.postgresql.ds.PGPoolingDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
 
 import javax.sql.DataSource;
 import java.io.File;
@@ -32,6 +33,7 @@ import static org.junit.Assert.assertEquals;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"classpath:/it_test_context.xml"})
+@TransactionConfiguration(defaultRollback = true)
 public class TransactionDAOUnTest
 {
     @Autowired
