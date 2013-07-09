@@ -45,6 +45,17 @@ public class BankAccountDAOImpl extends GenericDAOImpl implements BankAccountDAO
     @Override
     public void update(String accountNumber, double balance, String log)
     {
+        for (Character c : accountNumber.toCharArray())
+        {
+            if ((('a' <= c) && (c <= 'z')) || (('A' <= c) && (c <= 'Z')))
+            {
+                throw new IllegalArgumentException();
+            }
+        }
+        if (accountNumber.length() > 10)
+        {
+            throw new IllegalArgumentException();
+        }
         BankAccountEntity bankAccountEntity = findByAccountNumber(accountNumber);
         bankAccountEntity.setBalance(balance);
         bankAccountEntity.setLog(log);

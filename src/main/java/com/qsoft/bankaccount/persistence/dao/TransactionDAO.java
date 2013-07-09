@@ -12,6 +12,7 @@ import java.util.List;
 public interface TransactionDAO extends GenericDAO
 {
     public List<TransactionEntity> findByAccountNumber(String accountNumber);
+    public List<TransactionEntity> findBetween2TimeStamp(String accountNumber, long startTime, long endTime);
 
     public TransactionEntity findById(int id);
 

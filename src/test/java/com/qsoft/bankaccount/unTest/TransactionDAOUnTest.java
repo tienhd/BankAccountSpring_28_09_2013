@@ -96,4 +96,14 @@ public class TransactionDAOUnTest
         }
 
     }
+
+    @Test
+    public void testFindTransactionBetween2TimeStamp()
+    {
+        long startTime = 13000;
+        long endTime = 16000;
+
+        List<TransactionEntity> resultTransactionEntityList = transactionDAO.findBetween2TimeStamp(accountNumber,startTime,endTime);
+
+    }
 }

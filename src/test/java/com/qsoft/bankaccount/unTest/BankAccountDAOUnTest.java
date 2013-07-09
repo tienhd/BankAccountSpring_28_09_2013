@@ -22,6 +22,7 @@ import java.io.FileInputStream;
 import java.sql.Connection;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 /**
  * User: tienhd
@@ -118,6 +119,35 @@ public class BankAccountDAOUnTest
         BankAccountEntity getBankAccount = bankAccountDAO.findByAccountNumber(accountNumber);
 
         double newBalance = 50 + getBankAccount.getBalance(); //150
+        bankAccountDAO.update(accountNumber, newBalance, "Deposited 50");
+
+        BankAccountEntity savedBankAccount = bankAccountDAO.findByAccountNumber(accountNumber);
+        assertEquals(savedBankAccount.getAccountNumber(),accountNumber);
+        assertEquals(savedBankAccount.getBalance(),newBalance,0.001);
+    }
+
+    @Test (expected = IllegalArgumentException.class)
+    public void testSaveAccountWithAccountNumberContainCharacterThrowException()
+    {
+        String accountNumber = "a123456789";
+        bankAccountDAO.update("a123456789", 50, "Deposite 50");
+        fail("Exeption expected");
+    }
+
+    @Test (expected = IllegalArgumentException.class)
+    public void testSaveAccountWithAccountNumberLongerThan10Chars()
+    {
+        String accountNumber = "012345678999";
+        bankAccountDAO.update(accountNumber, 50, "Deposite 50");
+        fail("Exeption expected");
+    }
+
+    @Test
+    public void testWithdrawMoneyThenSaveAccountAfterTransactionToDB()
+    {
+        BankAccountEntity getBankAccount = bankAccountDAO.findByAccountNumber(accountNumber);
+
+        double newBalance = getBankAccount.getBalance() - 50; //50
         bankAccountDAO.update(accountNumber, newBalance, "Deposited 50");
 
         BankAccountEntity savedBankAccount = bankAccountDAO.findByAccountNumber(accountNumber);
