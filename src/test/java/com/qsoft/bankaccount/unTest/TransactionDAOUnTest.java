@@ -103,7 +103,16 @@ public class TransactionDAOUnTest
         long startTime = 13000;
         long endTime = 16000;
 
-        List<TransactionEntity> resultTransactionEntityList = transactionDAO.findBetween2TimeStamp(accountNumber,startTime,endTime);
+        List<TransactionEntity> resultTransactionEntityList = transactionDAO.findBetween2TimeStamp(accountNumber, startTime, endTime);
+        List<TransactionEntity> createdTransactionEntityList = new ArrayList<TransactionEntity>();
+        TransactionEntity transactionEntity1 = new TransactionEntity(accountNumber,-10f,"Withdraw from Account",15000);
+        createdTransactionEntityList.add(transactionEntity1);
+        int i =0;
+        for(TransactionEntity transactionEntity : resultTransactionEntityList)
+        {
+            assertEquals(transactionEntity,createdTransactionEntityList.get(i));
+            i++;
+        }
 
     }
 }

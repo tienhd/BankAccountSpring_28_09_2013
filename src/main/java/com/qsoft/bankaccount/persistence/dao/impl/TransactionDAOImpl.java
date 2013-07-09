@@ -49,4 +49,15 @@ public class TransactionDAOImpl extends GenericDAOImpl implements TransactionDAO
     {
         //To change body of implemented methods use File | Settings | File Templates.
     }
+
+    @Override
+    public List<TransactionEntity> findBetween2TimeStamp(String accountNumber, long startTime, long endTime)
+    {
+        Query query = entityManager.createQuery("select c from TransactionEntity c where c.timeStamp > :startTime " +
+                "and c.timeStamp < :endTime and c.accountNumber = :accountNumber");
+        query.setParameter("accountNumber", accountNumber);
+        query.setParameter("startTime", startTime);
+        query.setParameter("endTime", endTime);
+        return query.getResultList();
+    }
 }
