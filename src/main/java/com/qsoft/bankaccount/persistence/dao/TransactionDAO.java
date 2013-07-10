@@ -21,4 +21,6 @@ public interface TransactionDAO extends GenericDAO
     public void update(int id, String accountNumber, double amount, String log);
 
     public void deleteAllByAccountNumber(String accountNumber);
+
+    List<TransactionEntity> findNLastest(String accountNumber, int n);
 }

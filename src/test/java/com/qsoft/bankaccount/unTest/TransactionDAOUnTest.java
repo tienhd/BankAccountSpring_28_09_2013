@@ -113,6 +113,21 @@ public class TransactionDAOUnTest
             assertEquals(transactionEntity,createdTransactionEntityList.get(i));
             i++;
         }
+    }
 
+    @Test
+    public void testFindNLastestTransaction()
+    {
+        int n = 1;
+        List<TransactionEntity> resultTransactionEntityList = transactionDAO.findNLastest(accountNumber, n);
+        List<TransactionEntity> createdTransactionEntityList = new ArrayList<TransactionEntity>();
+        TransactionEntity transactionEntity1 = new TransactionEntity(accountNumber,-10f,"Withdraw from Account",15000);
+        createdTransactionEntityList.add(transactionEntity1);
+        int i =0;
+        for(TransactionEntity transactionEntity : resultTransactionEntityList)
+        {
+            assertEquals(transactionEntity,createdTransactionEntityList.get(i));
+            i++;
+        }
     }
 }

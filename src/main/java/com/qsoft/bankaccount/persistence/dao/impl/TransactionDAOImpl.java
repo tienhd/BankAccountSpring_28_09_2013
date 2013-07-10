@@ -60,4 +60,14 @@ public class TransactionDAOImpl extends GenericDAOImpl implements TransactionDAO
         query.setParameter("endTime", endTime);
         return query.getResultList();
     }
+
+    @Override
+    public List<TransactionEntity> findNLastest(String accountNumber, int n)
+    {
+        Query query = entityManager.createQuery("select c from TransactionEntity c where c.accountNumber = :accountNumber order by " +
+                "c.timeStamp desc");
+        query.setMaxResults(n);
+        query.setParameter("accountNumber",accountNumber);
+        return query.getResultList();
+    }
 }
